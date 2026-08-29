@@ -11,17 +11,17 @@ export default function Address() {
     {
       icon: <Phone className="w-5 h-5 text-emerald-600" />,
       title: "Telepon & UGD",
-      content: " 0823-7960-5588"
+      content: "+62 852-4976-9327 "
     },
     {
       icon: <MessageCircle className="w-5 h-5 text-emerald-600" />,
       title: "WhatsApp",
-      content: "0812-3456-7890 (Chat Saja)"
+      content: "+62 852-4976-9327 (Chat Saja)"
     },
     {
       icon: <Mail className="w-5 h-5 text-emerald-600" />,
       title: "Email",
-      content: "lorem ipsum dolor sit amet"
+      content: "raniapriliadlgmail.com"
     }
   ];
 
@@ -99,44 +99,22 @@ export default function Address() {
 
           {/* Column Right: Custom Styled Map Area (5 cols on lg) */}
           <div className="lg:col-span-5 h-full flex flex-col justify-between">
-            <div className="bg-slate-50 border border-slate-100 rounded-3xl overflow-hidden shadow-sm p-4 h-full flex flex-col justify-between min-h-[400px]">
-              
-              {/* Custom SVG Styled Map Visual Block */}
-              <div className="relative bg-emerald-50 w-full h-[320px] rounded-2xl overflow-hidden border border-slate-150 shadow-inner flex flex-col items-center justify-center">
+            <div className="bg-slate-50 border border-slate-100 rounded-3xl overflow-hidden shadow-sm p-4 flex flex-col gap-4">
                 
-                {/* SVG Maps Road Lines for authentic design */}
-                <svg className="absolute inset-0 w-full h-full text-slate-300 opacity-60" xmlns="http://www.w3.org/2000/svg">
-                  <line x1="0" y1="50" x2="500" y2="50" stroke="currentColor" strokeWidth="8" />
-                  <line x1="120" y1="0" x2="120" y2="400" stroke="currentColor" strokeWidth="12" />
-                  <line x1="0" y1="200" x2="500" y2="280" stroke="currentColor" strokeWidth="16" />
-                  <line x1="320" y1="0" x2="320" y2="400" stroke="currentColor" strokeWidth="8" />
-                </svg>
-
-                {/* Neighbor landmarks representation */}
-                <div className="absolute top-10 left-4 bg-white/80 backdrop-blur px-2.5 py-1 rounded shadow text-[9px] font-bold text-slate-400">
-                  Kawasan Plaju Darat
+                {/* Interactive Embedded Google Maps */}
+                <div className="relative w-full h-[320px] rounded-2xl overflow-hidden border border-slate-150 shadow-inner">
+                  <iframe
+                    title="Lokasi Klinik Rani Medika"
+                    src="https://www.google.com/maps?q=KLINIK+RANI+MEDIKA+Tegal+Binangun+Plaju+Palembang&output=embed"
+                    width="100%"
+                    height="100%"
+                    style={{ border: 0 }}
+                    allowFullScreen
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                    className="absolute inset-0"
+                  />
                 </div>
-                <div className="absolute bottom-16 right-8 bg-white/80 backdrop-blur px-2.5 py-1 rounded shadow text-[9px] font-bold text-slate-400">
-                  Jalan Tegal Binangun
-                </div>
-                
-
-                {/* Primary Clinic Pin */}
-                <div className="absolute top-1/2 left-1/3 transform -translate-x-1/2 -translate-y-1/2 flex flex-col items-center animate-bounce-slow">
-                  <div className="bg-rose-500 text-white p-2.5 rounded-full shadow-lg shadow-rose-500/30 border-2 border-white">
-                    <MapPin className="w-6 h-6 fill-rose-100" />
-                  </div>
-                  <div className="bg-slate-800 text-white font-bold text-[10px] px-2.5 py-1 rounded-md shadow-md mt-2 whitespace-nowrap border border-slate-700">
-                    Klinik Rani Medika
-                  </div>
-                </div>
-
-                {/* Map Scale or Compass overlay */}
-              </div>
-              <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur px-2.5 py-1 rounded shadow text-[9px] text-slate-500 font-mono"> 
-              Kota Palembang, Sumsel
-              </div>
-
               {/* Map Actions */}
               <div className="pt-4 flex flex-col sm:flex-row gap-3 w-full">
                 <a

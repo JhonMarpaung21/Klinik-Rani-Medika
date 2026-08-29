@@ -18,17 +18,12 @@ export default function Hero({ onNavigateToBooking, onNavigateToServices }: Hero
           
           {/* Hero text section */}
           <div className="lg:col-span-7 flex flex-col items-start space-y-6">
-            <div className="inline-flex items-center gap-2 px-3 py-1.5 rounded-full bg-emerald-100/75 border border-emerald-200 text-emerald-800 text-xs font-semibold tracking-wide">
-              <ShieldCheck className="w-3.5 h-3.5 text-emerald-600" />
-              <span>Fasilitas Kesehatan Terakreditasi Paripurna</span>
-            </div>
 
             <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-slate-800 tracking-tight leading-none">
               Pelayanan Medis <span className="text-emerald-600">Terpercaya & Berhati Mulia</span>
             </h1>
-
             <p className="text-base sm:text-lg text-slate-600 max-w-xl leading-relaxed">
-              lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+              Klinik Rani Medika hadir untuk memberikan pelayanan medis profesional dengan pendekatan yang ramah dan penuh empati. Temui dokter spesialis kami dan buat janji online dengan mudah.
             </p>
 
             {/* CTA Buttons */}
@@ -76,32 +71,10 @@ export default function Hero({ onNavigateToBooking, onNavigateToServices }: Hero
               {/* Main image container */}
               <div className="w-full h-full rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl">
                 <img
-                  src="https://images.unsplash.com/photo-1519494026892-80bbd2d6fd0d?auto=format&fit=crop&q=80&w=600&h=600"
-                  alt="Klinik Rani Medika Lobby"
-                  className="w-full h-full object-cover"
-                  referrerPolicy="no-referrer"
-                />
-              </div>
-
-              {/* Floating badges for extra polish */}
-              <div className="absolute -left-6 bottom-10 bg-white p-4 rounded-2xl shadow-xl border border-slate-50 flex items-center gap-3 animate-bounce-slow">
-                <div className="p-2.5 bg-emerald-50 text-emerald-600 rounded-xl">
-                  <Heart className="w-5 h-5 fill-emerald-500 text-emerald-500" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-slate-800">Pelayanan Tulus</h4>
-                  <p className="text-[10px] text-slate-400">Sepenuh hati & ramah</p>
-                </div>
-              </div>
-
-              <div className="absolute -right-4 top-10 bg-white p-4 rounded-2xl shadow-xl border border-slate-50 flex items-center gap-3 animate-float-slow">
-                <div className="p-2.5 bg-teal-50 text-teal-600 rounded-xl">
-                  <UserCheck className="w-5 h-5" />
-                </div>
-                <div>
-                  <h4 className="text-sm font-bold text-slate-800">Dokter Spesialis</h4>
-                  <p className="text-[10px] text-slate-400">Pendidikan Terkemuka</p>
-                </div>
+                src="/images/klinik-rani-medika.png"
+                alt="Klinik Pratama Rani Medika - Tampak Depan"
+                className="w-full h-full object-cover"
+                />    
               </div>
             </div>
           </div>

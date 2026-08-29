@@ -24,7 +24,7 @@ export default function Services() {
           {
             id: "poly-gigi",
             title: "Layanan Dokter Gigi (Dental Care)",
-            description: "Perawatan kesehatan gigi dan mulut lengkap mulai dari pembersihan karang gigi hingga perawatan saluran akar.",
+            description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
             icon: "Smile",
             price: "Mulai Rp 150.000",
             duration: "30 - 60 Menit",
@@ -41,7 +41,7 @@ export default function Services() {
           {
             id: "poly-umum",
             title: "Layanan Dokter Umum (General Care)",
-            description: "Pemeriksaan medis umum, tindakan medis kecil, laboratorium sederhana, dan vaksinasi.",
+            description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
             icon: "Activity",
             price: "Mulai Rp 75.000",
             duration: "15 - 30 Menit",
@@ -58,7 +58,7 @@ export default function Services() {
           {
             id: "bpjs",
             title: "Layanan BPJS Kesehatan (FKTP)",
-            description: "Fasilitas Kesehatan Tingkat Pertama melayani pemeriksaan umum, gigi, obat, dan rujukan dengan BPJS.",
+            description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
             icon: "ShieldCheck",
             price: "Gratis (Ditanggung BPJS)",
             duration: "Sesuai Kebutuhan",
@@ -73,7 +73,7 @@ export default function Services() {
           {
             id: "kebidanan",
             title: "Kebidanan",
-            description: "Pelayanan kesehatan untuk ibu, kehamilan, dan keluarga berencana.",
+            description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
             icon: "Baby",
             price: "Mulai Rp 100.000",
             duration: "20 - 45 Menit",

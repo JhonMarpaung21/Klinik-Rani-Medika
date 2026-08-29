@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Phone, Clock, Menu, X, HeartPulse } from "lucide-react";
+import { Phone, Clock, Menu, X } from "lucide-react";
 
 interface HeaderProps {
   activeSection: string;
@@ -45,7 +45,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
           <span className="flex items-center gap-1.5">
             <Phone className="w-3.5 h-3.5 text-emerald-300" />
             <span className="font-semibold">Layanan Darurat:</span>
-            <a href="tel:0211234567" className="hover:underline">021-123-4567</a>
+            <a href="tel:0211234567" className="hover:underline">+62 852-4976-9327</a>
           </span>
           <span className="hidden md:flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5 text-emerald-300" />
@@ -54,7 +54,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
         </div>
         <div className="flex items-center gap-3">
           <a
-            href="https://wa.me/628123456789"
+            href="https://wa.me/6285249769327"
             target="_blank"
             rel="noopener noreferrer"
             className="hover:text-white font-medium transition-colors"
@@ -72,19 +72,21 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             : "bg-white/95 backdrop-blur-md md:bg-transparent"
         }`}
       >
-        <div
-          className="flex items-center gap-2 cursor-pointer group"
-          onClick={() => handleNavClick("beranda")}
-        >
-          <div className="bg-emerald-600 text-white p-2 rounded-xl shadow-md shadow-emerald-200 transition-transform group-hover:scale-105">
-            <HeartPulse className="w-6 h-6" />
+          <div
+            className="flex items-center gap-2 cursor-pointer group"
+            onClick={() => handleNavClick("beranda")}
+          >
+            <img
+              src="/images/logo.png"
+              alt="Logo Klinik Rani Medika"
+              className="h-10 w-auto transition-transform group-hover:scale-105"
+            />
+            <div>
+    <         h1 className="text-lg font-bold text-slate-800 leading-none tracking-tight">
+                Klinik Rani Medika
+              </h1>
+            </div>
           </div>
-          <div>
-            <h1 className="text-lg font-bold text-slate-800 leading-none tracking-tight">
-              Klinik Rani Medika
-            </h1>
-          </div>
-        </div>
 
         {/* Desktop Menu */}
         <div className="hidden lg:flex items-center gap-1">

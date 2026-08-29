@@ -1,5 +1,5 @@
 import React from "react";
-import { HeartPulse, Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
+import { Phone, Mail, MapPin, Facebook, Instagram, Twitter } from "lucide-react";
 
 interface FooterProps {
   onNavigate: (sectionId: string) => void;
@@ -25,14 +25,15 @@ export default function Footer({ onNavigate }: FooterProps) {
         {/* Col 1: Brand & Desc (4 cols) */}
         <div className="md:col-span-5 space-y-6">
           <div className="flex items-center gap-2 cursor-pointer group" onClick={() => onNavigate("beranda")}>
-            <div className="bg-emerald-600 text-white p-2 rounded-xl">
-              <HeartPulse className="w-6 h-6" />
-            </div>
+            <img
+              src="/images/logo.png"
+              alt="Logo Klinik Rani Medika"
+               className="h-10 w-auto"
+            />
             <div>
               <h2 className="text-lg font-extrabold text-white leading-none tracking-tight">
                 Klinik Rani Medika
               </h2>
-
             </div>
           </div>
           
@@ -81,17 +82,17 @@ export default function Footer({ onNavigate }: FooterProps) {
           <div className="space-y-4 text-xs sm:text-sm text-slate-400">
             <div className="flex gap-3 items-start">
               <MapPin className="w-5 h-5 text-emerald-500 shrink-0 mt-0.5" />
-              <span>Jl. Raya Kebon Jeruk No. 12B, Jakarta Barat, DKI Jakarta, 11530</span>
+              <span>Jl. Tegal Binangun, Plaju Darat, Kec. Plaju, Kota Palembang, Sumatera Selatan 30267</span>
             </div>
 
             <div className="flex gap-3 items-center">
               <Phone className="w-5 h-5 text-emerald-500 shrink-0" />
-              <a href="tel:0211234567" className="hover:text-emerald-400">021-123-4567</a>
+              <a href="tel:0211234567" className="hover:text-emerald-400">+62 852-4976-9327   </a>
             </div>
 
             <div className="flex gap-3 items-center">
               <Mail className="w-5 h-5 text-emerald-500 shrink-0" />
-              <a href="mailto:info@ranimedika.com" className="hover:text-emerald-400">info@ranimedika.com</a>
+              <a href="mailto:raniapriliadl@gmail.com" className="hover:text-emerald-400">raniapriliadl@gmail.com</a>
             </div>
           </div>
         </div>
@@ -102,7 +103,7 @@ export default function Footer({ onNavigate }: FooterProps) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 md:px-8 pt-8 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-4">
         <p>© {currentYear} Klinik Rani Medika. Seluruh Hak Cipta Dilindungi.</p>
         <p className="font-semibold text-slate-400">
-          React & Tailwind • Layanan Kesehatan Paripurna
+          React & Tailwind
         </p>
       </div>
     </footer>
