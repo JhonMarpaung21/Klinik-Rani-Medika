@@ -96,7 +96,7 @@ var services = [
 var doctors = [
   {
     id: "dr-rani",
-    name: "dr. Rani Amelia, Sp.PD",
+    name: "dr. abal, Sp.PD",
     role: "Spesialis Penyakit Dalam",
     experience: "12 Tahun Pengalaman",
     education: "S1 & Spesialis Kedokteran Universitas Indonesia (UI)",
@@ -104,7 +104,7 @@ var doctors = [
     status: "Aktif",
     rating: 4.9,
     reviewsCount: 142,
-    image: "https://images.unsplash.com/photo-1559839734-2b71ea197ec2?auto=format&fit=crop&q=80&w=300&h=300"
+    image: ""
   },
   {
     id: "dr-budi",
@@ -116,19 +116,19 @@ var doctors = [
     status: "Aktif",
     rating: 4.8,
     reviewsCount: 95,
-    image: "https://images.unsplash.com/photo-1622253692010-333f2da6031d?auto=format&fit=crop&q=80&w=300&h=300"
+    image: ""
   },
   {
-    id: "drg-citra",
-    name: "drg. Citra Lestari",
+    id: "drg-rani",
+    name: "drg. Rani Aprilia Dilaga",
     role: "Spesialis Kesehatan Gigi",
-    experience: "6 Tahun Pengalaman",
-    education: "Kedokteran Gigi Universitas Padjadjaran (UNPAD)",
-    schedule: "Selasa, Kamis, Jumat (14.00 - 19.00)",
+    experience: "5 Tahun Pengalaman",
+    education: "Kedokteran Gigi Universitas Sriwijaya (Unsri)",
+    schedule: "Selasa, Rabu, Kamis (14.00 - 19.00)",
     status: "Aktif",
     rating: 4.9,
     reviewsCount: 88,
-    image: "https://images.unsplash.com/photo-1594824813573-246434e33963?auto=format&fit=crop&q=80&w=300&h=300"
+    image: "/images/foto_rani.png"
   },
   {
     id: "dr-danu",
@@ -140,7 +140,7 @@ var doctors = [
     status: "Cuti",
     rating: 5,
     reviewsCount: 120,
-    image: "https://images.unsplash.com/photo-1612349317150-e413f6a5b16d?auto=format&fit=crop&q=80&w=300&h=300"
+    image: ""
   }
 ];
 var initialReviews = [
