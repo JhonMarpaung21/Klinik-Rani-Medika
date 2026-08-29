@@ -1,0 +1,6 @@
+{
+  "name": "Klinik Rani Medika",
+  "description": "Website Resmi Klinik Rani Medika - Memberikan pelayanan kesehatan terbaik, profesional, dan ramah dengan layanan Poli Umum, Gigi, KIA, Anak, Farmasi, dan Laboratorium.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
