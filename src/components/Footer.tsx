@@ -26,7 +26,7 @@ export default function Footer({ onNavigate }: FooterProps) {
         <div className="md:col-span-5 space-y-6">
           <div className="flex items-center gap-2 cursor-pointer group" onClick={() => onNavigate("beranda")}>
             <img
-              src="/images/logo.png"
+              src={`${import.meta.env.BASE_URL}images/logo.png`}
               alt="Logo Klinik Rani Medika"
                className="h-10 w-auto"
             />

@@ -77,7 +77,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
             onClick={() => handleNavClick("beranda")}
           >
             <img
-              src="/images/logo.png"
+              src={`${import.meta.env.BASE_URL}images/logo.png`}
               alt="Logo Klinik Rani Medika"
               className="h-10 w-auto transition-transform group-hover:scale-105"
             />

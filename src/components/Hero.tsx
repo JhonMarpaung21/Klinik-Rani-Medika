@@ -71,7 +71,7 @@ export default function Hero({ onNavigateToBooking, onNavigateToServices }: Hero
               {/* Main image container */}
               <div className="w-full h-full rounded-[2.5rem] overflow-hidden border-4 border-white shadow-2xl">
                 <img
-                src="/images/klinik-rani-medika.png"
+                src={`${import.meta.env.BASE_URL}images/klinik-rani-medika.png`}
                 alt="Klinik Pratama Rani Medika - Tampak Depan"
                 className="w-full h-full object-cover"
                 />    

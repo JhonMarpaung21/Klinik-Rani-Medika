@@ -78,7 +78,7 @@ const services = [
 
 const doctors = [
   {
-    id: "dr-rani",
+    id: "dr-abal",
     name: "dr. abal, Sp.PD",
     role: "Spesialis Penyakit Dalam",
     experience: "12 Tahun Pengalaman",
@@ -111,7 +111,7 @@ const doctors = [
     status: "Aktif",
     rating: 4.9,
     reviewsCount: 88,
-    image: "/images/foto_rani.png"
+    image: "images/foto_rani.png"
   },
   {
     id: "dr-danu",
