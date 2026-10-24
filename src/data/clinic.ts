@@ -99,7 +99,7 @@ export const doctors: Doctor[] = [
     status: "Aktif",
     rating: 4.9,
     reviewsCount: 88,
-    image: ""
+    image: "images/foto_rani.png"
   },
   {
     id: "dr-danu",
