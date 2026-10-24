@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from "react";
-import { Doctor } from "../types";
+import React, { useState } from "react";
+import { doctors as doctorCatalog } from "../data/clinic";
+import { isDoctor } from "../lib/api";
+import { useCatalog } from "../lib/useCatalog";
 import { Star, Clock, GraduationCap, Calendar, Check, AlertTriangle, MessageSquare } from "lucide-react";
 
 interface DoctorsProps {
@@ -7,8 +9,7 @@ interface DoctorsProps {
 }
 
 export default function Doctors({ onSelectDoctorToBook }: DoctorsProps) {
-  const [doctors, setDoctors] = useState<Doctor[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: doctors, loading, error } = useCatalog("/doctors", doctorCatalog, isDoctor);
   const [selectedSpecialty, setSelectedSpecialty] = useState("Semua");
 
   const specialties = [
@@ -18,62 +19,6 @@ export default function Doctors({ onSelectDoctorToBook }: DoctorsProps) {
     "Gigi",
     "Anak"
   ];
-
-  useEffect(() => {
-    fetch("/api/doctors")
-      .then((res) => {
-        if (!res.ok) throw new Error("Gagal mengambil data dokter");
-        return res.json();
-      })
-      .then((data) => {
-        setDoctors(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching doctors:", err);
-        // Fallback static data if api fails
-        const fallback: Doctor[] = [
-          {
-            id: "dr-rani",
-            name: "dr. abal, Sp.PD",
-            role: "Spesialis Penyakit Dalam",
-            experience: "12 Tahun Pengalaman",
-            education: "S1 & Spesialis Kedokteran Universitas Indonesia (UI)",
-            schedule: "Senin - Kamis (08.00 - 13.00), Sabtu (09.00 - 12.00)",
-            status: "Aktif",
-            rating: 4.9,
-            reviewsCount: 142,
-            image: ""
-          },
-          {
-            id: "dr-budi",
-            name: "dr. Budi Santoso, GP",
-            role: "Dokter Umum",
-            experience: "8 Tahun Pengalaman",
-            education: "Kedokteran Universitas Gadjah Mada (UGM)",
-            schedule: "Senin - Sabtu (13.00 - 17.00 & 18.30 - 21.00)",
-            status: "Aktif",
-            rating: 4.8,
-            reviewsCount: 95,
-            image: ""
-          },
-          {
-            id: "drg-rani",
-            name: "drg. Rani Aprilia Dilaga",
-            role: "Spesialis Kesehatan Gigi",
-            experience: "5 Tahun Pengalaman",
-            education: "Kedokteran Gigi Universitas Sriwijaya (Unsri)",
-            schedule: "Selasa, Rabu, Kamis (14.00 - 19.00)",
-            status: "Aktif",
-            rating: 4.5,
-            reviewsCount: 88,
-            image: "/images/foto_rani.png"
-          }
-        ];
-        setDoctors(fallback);
-        setLoading(false);
-      });
-  }, []);
 
   const filteredDoctors = selectedSpecialty === "Semua"
     ? doctors
@@ -112,6 +57,7 @@ export default function Doctors({ onSelectDoctorToBook }: DoctorsProps) {
           ))}
         </div>
 
+        {error && <p role="status" className="mb-6 text-center text-sm text-amber-700">Menampilkan informasi tersimpan. {error}</p>}
         {/* Loading State */}
         {loading ? (
           <div className="flex justify-center items-center py-12">
@@ -126,12 +72,13 @@ export default function Doctors({ onSelectDoctorToBook }: DoctorsProps) {
               >
                 {/* Image & Status Area */}
                 <div className="relative aspect-4/3 overflow-hidden bg-slate-100">
-                  <img
-                    src={doc.image}
+                  {doc.image ? <img
+                    src={/^(https?:)?\/\//.test(doc.image) ? doc.image : import.meta.env.BASE_URL + doc.image.replace(/^\/+/, "")}
                     alt={doc.name}
                     className="w-full h-full object-cover object-top transition-transform duration-500 hover:scale-105"
                     referrerPolicy="no-referrer"
-                  />
+                    onError={(event) => { event.currentTarget.style.display = "none"; }}
+                  /> : <div className="h-full flex items-center justify-center text-5xl font-bold text-emerald-300" aria-label={"Foto belum tersedia untuk " + doc.name}>{doc.name.split(" ").slice(0, 2).map(part => part[0]).join("")}</div>}
                   <div className="absolute top-4 left-4 flex gap-2">
                     <span
                       className={`px-3 py-1 rounded-full text-[10px] font-bold tracking-wide uppercase ${
@@ -204,6 +151,7 @@ export default function Doctors({ onSelectDoctorToBook }: DoctorsProps) {
             ))}
           </div>
         )}
+        {!loading && filteredDoctors.length === 0 && <p className="text-center text-slate-500">Belum ada dokter untuk kategori ini.</p>}
 
       </div>
     </section>

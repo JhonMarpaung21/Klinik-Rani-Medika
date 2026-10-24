@@ -14,7 +14,7 @@ export default function Footer({ onNavigate }: FooterProps) {
     { id: "layanan", label: "Layanan Medis" },
     { id: "dokter", label: "Jadwal Dokter" },
     { id: "alamat", label: "Lokasi & Alamat" },
-    { id: "ulasan", label: "Ulasan Google" },
+    { id: "ulasan", label: "Ulasan Pasien" },
     { id: "kontak", label: "Buat Janji Online" }
   ];
 
@@ -87,7 +87,7 @@ export default function Footer({ onNavigate }: FooterProps) {
 
             <div className="flex gap-3 items-center">
               <Phone className="w-5 h-5 text-emerald-500 shrink-0" />
-              <a href="tel:0211234567" className="hover:text-emerald-400">+62 852-4976-9327   </a>
+              <a href="tel:+6285249769327" className="hover:text-emerald-400">+62 852-4976-9327   </a>
             </div>
 
             <div className="flex gap-3 items-center">

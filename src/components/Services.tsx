@@ -1,92 +1,32 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Service } from "../types";
+import { useCatalog } from "../lib/useCatalog";
+import { isService } from "../lib/api";
+import { services as serviceCatalog } from "../data/clinic";
 import { Activity, Smile, Baby, FlaskConical, Pill, Home, Check, ChevronRight, X, Clock, Banknote, ShieldCheck } from "lucide-react";
 
 export default function Services() {
-  const [services, setServices] = useState<Service[]>([]);
-  const [loading, setLoading] = useState(true);
+  const { data: services, loading, error } = useCatalog("/services", serviceCatalog, isService);
   const [selectedService, setSelectedService] = useState<Service | null>(null);
+  const dialogRef = useRef<HTMLDialogElement>(null);
 
   useEffect(() => {
-    fetch("/api/services")
-      .then((res) => {
-        if (!res.ok) throw new Error("Gagal mengambil data");
-        return res.json();
-      })
-      .then((data) => {
-        setServices(data);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error fetching services:", err);
-        // Fallback static data if api fails
-        const fallback: Service[] = [
-          {
-            id: "poly-gigi",
-            title: "Layanan Dokter Gigi (Dental Care)",
-            description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            icon: "Smile",
-            price: "Mulai Rp 150.000",
-            duration: "30 - 60 Menit",
-            features: [
-              "Pembersihan Karang Gigi (Scaling & Polishing)",
-              "Penambalan Gigi (Dental Filling)",
-              "Cabut Gigi (Tooth Extraction)",
-              "Perawatan Saluran Akar (Endodontik)",
-              "Pembuatan Gigi Tiruan / Palsu (Denture)",
-              "Pencegahan Gigi Berlubang Anak",
-              "Konsultasi & Pemeriksaan Rutin"
-            ]
-          },
-          {
-            id: "poly-umum",
-            title: "Layanan Dokter Umum (General Care)",
-            description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            icon: "Activity",
-            price: "Mulai Rp 75.000",
-            duration: "15 - 30 Menit",
-            features: [
-              "Konsultasi Medis & Pemeriksaan Fisik",
-              "Vaksin Influenza",
-              "Tes Buta Warna & Surat Sehat",
-              "Cek Lab (Gula, Kolesterol, Asam Urat, HB)",
-              "Tindakan Medis Kecil & Perawatan Luka",
-              "Sunat",
-              "Nebulizer (Terapi Uap)"
-            ]
-          },
-          {
-            id: "bpjs",
-            title: "Layanan BPJS Kesehatan (FKTP)",
-            description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            icon: "ShieldCheck",
-            price: "Gratis (Ditanggung BPJS)",
-            duration: "Sesuai Kebutuhan",
-            features: [
-              "Panduan & Layanan Pindah Faskes",
-              "Pengobatan BPJS Terintegrasi",
-              "Sistem Rujukan Online Rumah Sakit",
-              "Program Prolanis (Diabetes, Hipertensi)",
-              "Pemberian Obat BPJS (Fornas)"
-            ]
-          },
-          {
-            id: "kebidanan",
-            title: "Kebidanan",
-            description: "lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
-            icon: "Baby",
-            price: "Mulai Rp 100.000",
-            duration: "20 - 45 Menit",
-            features: [
-              "Layanan KB (Keluarga Berencana)",
-              "Cek Kehamilan & Konsultasi"
-            ]
-          }
-        ];
-        setServices(fallback);
-        setLoading(false);
-      });
-  }, []);
+    const dialog = dialogRef.current;
+    if (!selectedService || !dialog) return;
+
+    const previousFocus = document.activeElement;
+    const previousOverflow = document.body.style.overflow;
+    dialog.showModal();
+    document.body.style.overflow = "hidden";
+
+    return () => {
+      if (dialog.open) dialog.close();
+      document.body.style.overflow = previousOverflow;
+      if (previousFocus instanceof HTMLElement && previousFocus.isConnected) {
+        previousFocus.focus({ preventScroll: true });
+      }
+    };
+  }, [selectedService]);
 
   // Icon mapper function
   const renderIcon = (iconName: string) => {
@@ -125,6 +65,12 @@ export default function Services() {
             Klinik Rani Medika menyediakan berbagai macam poli klinis dan penunjang medis yang siap melayani kebutuhan kesehatan utama keluarga Anda.
           </p>
         </div>
+
+        {error && (
+          <p role="status" className="mb-6 rounded-xl border border-amber-200 bg-amber-50 p-4 text-sm text-amber-800">
+            Data layanan terbaru belum dapat dimuat. Informasi yang tersedia tetap ditampilkan; konfirmasikan tarif dan layanan melalui WhatsApp klinik.
+          </p>
+        )}
 
         {/* Loading State */}
         {loading ? (
@@ -172,7 +118,22 @@ export default function Services() {
 
         {/* Detail Modal */}
         {selectedService && (
-          <div className="fixed inset-0 bg-slate-900/40 backdrop-blur-sm z-50 flex items-center justify-center p-4">
+          <dialog
+            ref={dialogRef}
+            aria-labelledby="service-dialog-title"
+            onCancel={(event) => {
+              event.preventDefault();
+              setSelectedService(null);
+            }}
+            onClick={(event) => {
+              if (event.target !== event.currentTarget) return;
+              const bounds = event.currentTarget.getBoundingClientRect();
+              if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) {
+                setSelectedService(null);
+              }
+            }}
+            className="m-auto w-[calc(100%_-_2rem)] max-w-xl max-h-[calc(100dvh_-_2rem)] overflow-y-auto rounded-3xl bg-transparent p-0 backdrop:bg-slate-900/40 backdrop:backdrop-blur-sm"
+          >
             <div className="bg-white rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl border border-slate-100 animate-scale-in">
               {/* Modal Banner */}
               <div className="bg-emerald-800 p-6 text-white relative">
@@ -190,7 +151,7 @@ export default function Services() {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold tracking-tight">{selectedService.title}</h3>
+                    <h3 id="service-dialog-title" className="text-xl font-bold tracking-tight pr-8">{selectedService.title}</h3>
                     <p className="text-xs text-emerald-200">Informasi Tarif & Cakupan Layanan</p>
                   </div>
                 </div>
@@ -246,7 +207,7 @@ export default function Services() {
                 </button>
               </div>
             </div>
-          </div>
+          </dialog>
         )}
 
       </div>

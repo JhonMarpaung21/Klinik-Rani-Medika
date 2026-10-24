@@ -21,7 +21,7 @@ export default function Address() {
     {
       icon: <Mail className="w-5 h-5 text-emerald-600" />,
       title: "Email",
-      content: "raniapriliadlgmail.com"
+      content: "raniapriliadl@gmail.com"
     }
   ];
 
@@ -88,7 +88,6 @@ export default function Address() {
                       <span className={`text-sm font-bold ${oh.hours === "Tutup" ? "text-rose-500" : "text-emerald-700"}`}>
                         {oh.hours}
                       </span>
-                      <span className="text-[10px] text-slate-400 font-medium">{oh.note}</span>
                     </div>
                   </div>
                 ))}

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { Phone, Clock, Menu, X } from "lucide-react";
 
 interface HeaderProps {
@@ -9,6 +9,7 @@ interface HeaderProps {
 export default function Header({ activeSection, onNavigate }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
 
   const navItems = [
     { id: "beranda", label: "Beranda" },
@@ -28,9 +29,36 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
         setIsScrolled(false);
       }
     };
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
+
+  useEffect(() => {
+    if (!isMenuOpen) return;
+
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    const desktopQuery = window.matchMedia("(min-width: 1024px)");
+    const handleBreakpointChange = () => {
+      if (desktopQuery.matches) setIsMenuOpen(false);
+    };
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        setIsMenuOpen(false);
+        menuButtonRef.current?.focus();
+      }
+    };
+    handleBreakpointChange();
+    document.addEventListener("keydown", handleKeyDown);
+    desktopQuery.addEventListener("change", handleBreakpointChange);
+
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.removeEventListener("keydown", handleKeyDown);
+      desktopQuery.removeEventListener("change", handleBreakpointChange);
+    };
+  }, [isMenuOpen]);
 
   const handleNavClick = (id: string) => {
     onNavigate(id);
@@ -45,11 +73,11 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
           <span className="flex items-center gap-1.5">
             <Phone className="w-3.5 h-3.5 text-emerald-300" />
             <span className="font-semibold">Layanan Darurat:</span>
-            <a href="tel:0211234567" className="hover:underline">+62 852-4976-9327</a>
+            <a href="tel:+6285249769327" className="hover:underline">+62 852-4976-9327</a>
           </span>
           <span className="hidden md:flex items-center gap-1.5">
             <Clock className="w-3.5 h-3.5 text-emerald-300" />
-            <span>Senin - Sabtu: 08:00 - 21:00</span>
+            <span>Senin - Sabtu: 08:00 - 19:30</span>
           </span>
         </div>
         <div className="flex items-center gap-3">
@@ -82,7 +110,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
               className="h-10 w-auto transition-transform group-hover:scale-105"
             />
             <div>
-    <         h1 className="text-lg font-bold text-slate-800 leading-none tracking-tight">
+    <h1 className="text-lg font-bold text-slate-800 leading-none tracking-tight">
                 Klinik Rani Medika
               </h1>
             </div>
@@ -115,9 +143,12 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
 
         {/* Mobile menu trigger */}
         <button
-          onClick={() => setIsMenuOpen(!isMenuOpen)}
+          ref={menuButtonRef}
+          onClick={() => setIsMenuOpen((open) => !open)}
           className="lg:hidden text-slate-700 hover:text-emerald-600 p-1.5 rounded-lg hover:bg-slate-100 transition-colors"
-          aria-label="Toggle Menu"
+          aria-label="Buka atau tutup menu"
+          aria-expanded={isMenuOpen}
+          aria-controls="mobile-navigation"
         >
           {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
         </button>
@@ -125,7 +156,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
 
       {/* Mobile Drawer Menu */}
       {isMenuOpen && (
-        <div className="lg:hidden fixed inset-0 top-[108px] sm:top-[76px] bg-white z-40 border-t border-slate-100 flex flex-col p-6 animate-fade-in">
+        <div id="mobile-navigation" className="lg:hidden absolute top-full left-0 w-full max-h-[calc(100dvh-120px)] overflow-y-auto bg-white z-40 border-t border-slate-100 flex flex-col p-6 animate-fade-in">
           <div className="flex flex-col gap-2 mb-8">
             {navItems.map((item) => (
               <button
@@ -150,7 +181,7 @@ export default function Header({ activeSection, onNavigate }: HeaderProps) {
               Buat Janji Temu Online
             </button>
             <div className="text-center text-slate-500 text-xs">
-              Hubungi Kami: <span className="font-semibold text-slate-700">021-123-4567</span>
+              Hubungi Kami: <span className="font-semibold text-slate-700">+62 852-4976-9327</span>
             </div>
           </div>
         </div>

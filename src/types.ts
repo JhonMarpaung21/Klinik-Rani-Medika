@@ -28,11 +28,12 @@ export interface Review {
   rating: number;
   text: string;
   timeAgo: string;
+  createdAt?: string;
   source: string;
 }
 
 export interface Appointment {
-  id?: string;
+  id: string;
   patientName: string;
   phone: string;
   email?: string;

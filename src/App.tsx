@@ -18,7 +18,7 @@ export default function App() {
     setActiveSection(id);
     const element = document.getElementById(id);
     if (element) {
-      const offset = 120; // accounts for the sticky header height
+      const offset = (document.querySelector("header")?.getBoundingClientRect().height ?? 120) + 16; // accounts for the sticky header height
       const bodyRect = document.body.getBoundingClientRect().top;
       const elementRect = element.getBoundingClientRect().top;
       const elementPosition = elementRect - bodyRect;
@@ -33,10 +33,7 @@ export default function App() {
 
   const handleSelectDoctorToBook = (doctorId: string) => {
     setSelectedDoctorId(doctorId);
-    // Smooth scroll to the contact/booking section
-    setTimeout(() => {
-      handleNavigate("kontak");
-    }, 100);
+    handleNavigate("kontak");
   };
 
   const handleClearSelectedDoctor = () => {
@@ -64,7 +61,8 @@ export default function App() {
       }
     };
 
-    window.addEventListener("scroll", handleScroll);
+    handleScroll();
+    window.addEventListener("scroll", handleScroll, { passive: true });
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
